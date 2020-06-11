@@ -1,3 +1,82 @@
+// ------------------------------------------------- REPORTS  --------------------------------------------------------------
+
+void reportLongest(string arr[], int& n)
+{
+	int max = 0;
+	int maxIndex;
+	for (int i = 0; i <= n; i++)
+	{
+		string temp = arr[i];
+		if (temp.length() > max)
+		{
+			max = temp.length();
+			maxIndex = i;
+		}
+	}
+	cout << "Longest string : ";
+	cout << arr[maxIndex];
+}
+
+void reportShortest(string arr[], int& n)
+{
+	int minIndex;
+	int min = 1000;
+	for (int i = 0; i < n; i++)
+	{
+		string temp = arr[i];
+
+		if (temp.length() < min)
+		{
+			min = temp.length();
+			minIndex = i;
+		}
+
+	}
+	cout << "Shortest string : ";
+	cout << arr[minIndex];
+}
+
+// -----------------------  STRING INPUT AND OUTPUT ------------------------------------------------
+
+
+
+void createString(string arr[], int& n)
+{
+	getline(cin, arr[n]);	
+}
+
+void addString(string arr[], int& n)
+{
+	int br;
+	cout << "how many?" << endl;
+	cin >> br;
+	createString(arr, n);
+	for (int i = 0; i < br; i++)
+	{
+		createString(arr, n);
+		n++;
+	}
+}
+
+void printArray(string arr[], int n)
+{
+	if (n > 0)
+	{
+		for (int i = 0; i <= n; i++)
+		{
+			if (i != n)
+			{
+				cout << i << " : " << arr[i] << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "There are no strings inserted yet. " << endl << endl
+			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
+	}
+}
+
 // ------------------------------------------- MENUS -----------------------------------------------------------------
 
 void eraseStringMenu(string arr[], int n)
