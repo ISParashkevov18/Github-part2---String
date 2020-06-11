@@ -1,4 +1,237 @@
-// ------------------------------------------------- REPORTS  --------------------------------------------------------------
+// --------------------------------------------- EDIT FUNCTIONS --------------------------------------------------------------
+void eraseByIndex(string arr[], int n , int index)
+{
+	
+	int start;
+	int num;
+	cout << "Starting index?" << endl;
+	cin >> start;
+	cout << "How much?" << endl;
+	cin >> num;
+	arr[index].erase(start, num);
+
+}
+
+void showMatchingCharacters(int indexArray[], int& matchingChars, string userCharacter, int& choice)
+{
+	
+	
+	for (int j = 0; j < matchingChars; j++)
+	{
+		cout << indexArray[j] << " ";
+	}
+
+	
+}
+int checkCorrectInput(int indexArray[], int& matchingChars,  int& choice)
+{
+	int br1 = 0;
+	for (int v = 0; v < matchingChars; v++)
+	{
+		if (choice == indexArray[v] )
+		{
+			br1++;
+		}
+
+	}
+	return br1;
+}
+
+int checkCharacter(string userCharacter, int index , int indexArray[], string arr[])
+{
+	int i = 0;
+	int matchingChars = 0;
+	while (i < arr[index].length())
+	{
+		string temp;
+		temp = arr[index].at(i);
+
+		if (temp.compare(userCharacter) == 0)
+		{
+			matchingChars++;
+			indexArray[matchingChars - 1] = i;
+		}
+		i++;
+	}
+	return matchingChars;
+}
+
+int IncorrectInput(string userCharacter, int index, int indexArray[], string arr[])
+{
+	int matchingChars;
+	cout << "Try again";
+	cin >> userCharacter;
+	checkCharacter(userCharacter, index, indexArray, arr);
+	matchingChars = checkCharacter(userCharacter, index, indexArray, arr);
+	return matchingChars;
+}
+
+void eraseByCharacters(string arr[], int n, int index)
+{
+	    int choice;
+		int indexArray[100];
+		string userCharacter;
+		int eraseNum;
+		cout << "How many characters do you want to erase?" << endl;
+		cin >> eraseNum;
+		cout << "Enter the character you want to start with : ";
+		cin >> userCharacter;
+		checkCharacter(userCharacter , index , indexArray, arr);
+
+		int matchingChars = checkCharacter(userCharacter, index, indexArray, arr);
+		   	
+		  
+		while(matchingChars == 0)
+		{
+			matchingChars = IncorrectInput(userCharacter, index, indexArray, arr);
+		}
+			
+			 if (matchingChars == 1)
+			{
+				arr[index].erase(indexArray[0], eraseNum);
+				
+			}
+			 if (matchingChars > 1)
+			{
+				cout << "This character is seen more than once in your string." << endl;
+				showMatchingCharacters(indexArray, matchingChars, userCharacter, choice);
+				cout << " Choose one of them " << endl;
+				cin >> choice;
+				checkCorrectInput(indexArray, matchingChars, choice);
+
+				while (checkCorrectInput(indexArray, matchingChars, choice) == 0)
+				{
+					cout << "This character was not found. Please try again." << endl;
+					cin >> choice;
+					checkCorrectInput(indexArray, matchingChars, choice);
+				}
+				if (checkCorrectInput(indexArray, matchingChars, choice) == 1)
+				{
+					arr[index].erase(choice, eraseNum);
+				}
+			}
+}
+
+
+
+void insertByIndex(string arr[], int n, int index)
+{
+
+	int start;
+	string insertedString;
+	cout << "Starting index?" << endl;
+	cin >> start;
+	cout << "What do you want to insert?" << endl;
+	cin >> insertedString;
+	arr[index].insert(start, insertedString);
+}
+
+void insertByCharacters(string arr[], int n, int index)
+{
+	int choice;
+	int indexArray[100];
+	string userCharacter;
+	string insertedString;
+	cout << "What do you want to insert?" << endl;
+	cin >> insertedString;
+	cout << "Enter the character you want to start inserting from : ";
+	cin >> userCharacter;
+	checkCharacter(userCharacter, index, indexArray, arr);
+
+	int matchingChars = checkCharacter(userCharacter, index, indexArray, arr);
+
+
+	while (matchingChars == 0)
+	{
+		matchingChars = IncorrectInput(userCharacter, index, indexArray, arr);
+	}
+
+	if (matchingChars == 1)
+	{
+		arr[index].insert(indexArray[0]+1, insertedString);
+
+	}
+	if (matchingChars > 1)
+	{
+		cout << "This character is seen more than once in your string." << endl;
+		showMatchingCharacters(indexArray, matchingChars, userCharacter, choice);
+		cout << " Choose one of them " << endl;
+		cin >> choice;
+		checkCorrectInput(indexArray, matchingChars, choice);
+
+		while (checkCorrectInput(indexArray, matchingChars, choice) == 0)
+		{
+			cout << "This character was not found. Please try again." << endl;
+			cin >> choice;
+			checkCorrectInput(indexArray, matchingChars, choice);
+		}
+		if (checkCorrectInput(indexArray, matchingChars, choice) == 1)
+		{
+			arr[index].insert(choice+1, insertedString);
+			
+		}
+	}
+}
+
+void replaceByIndex(string arr[], int n, int index)
+{
+	int start;
+	string insertedString;
+	cout << "Starting index?" << endl;
+	cin >> start;
+	cout << "What do you want to replace it with?" << endl;
+	cin >> insertedString;
+	arr[index].replace(start, insertedString.length(), insertedString);
+}
+
+void replaceByCharacters(string arr[], int n, int index)
+{
+	int choice;
+	int indexArray[100];
+	string userCharacter;
+	string insertedString;
+	cout << "Enter the character you want to start inserting from : ";
+	cin >> userCharacter;
+	cout << "What do you want to replace it with?" << endl;
+	cin >> insertedString;
+	checkCharacter(userCharacter, index, indexArray, arr);
+
+	int matchingChars = checkCharacter(userCharacter, index, indexArray, arr);
+
+
+	while (matchingChars == 0)
+	{
+		matchingChars = IncorrectInput(userCharacter, index, indexArray, arr);
+	}
+
+	if (matchingChars == 1)
+	{
+		arr[index].replace(indexArray[0], insertedString.length(), insertedString);
+
+	}
+	if (matchingChars > 1)
+	{
+		cout << "This character is seen more than once in your string." << endl;
+		showMatchingCharacters(indexArray, matchingChars, userCharacter, choice);
+		cout << " Choose one of them " << endl;
+		cin >> choice;
+		checkCorrectInput(indexArray, matchingChars, choice);
+
+		while (checkCorrectInput(indexArray, matchingChars, choice) == 0)
+		{
+			cout << "This character was not found. Please try again." << endl;
+			cin >> choice;
+			checkCorrectInput(indexArray, matchingChars, choice);
+		}
+		if (checkCorrectInput(indexArray, matchingChars, choice) == 1)
+		{
+			arr[index].replace(choice , insertedString.length(), insertedString);
+
+		}
+	}
+}
+
+ // ------------------------------------------------- REPORTS  --------------------------------------------------------------
 
 void reportLongest(string arr[], int& n)
 {
@@ -94,9 +327,11 @@ void eraseStringMenu(string arr[], int n)
 	case 1:
 		eraseByIndex(arr, n, index);
 		break;
-
 	case 2:
 		eraseByCharacters(arr, n, index);
+		break;
+	default:
+		cout << "The number you choose was not valid!" << endl << endl;
 		break;
 	}
 }
@@ -116,9 +351,11 @@ void insertStringMenu(string arr[], int n)
 	case 1:
 		insertByIndex(arr, n, index);
 		break;
-
 	case 2:
 		insertByCharacters(arr, n, index);
+		break;
+	default:
+		cout << "The number you choose was not valid!" << endl << endl;
 		break;
 	}
 }
@@ -138,9 +375,11 @@ void replaceStringMenu(string arr[], int n)
 	case 1:
 		replaceByIndex(arr, n, index);
 		break;
-
 	case 2:
 		replaceByCharacters(arr, n, index);
+		break;
+	default:
+		cout << "The number you choose was not valid!" << endl << endl;
 		break;
 	}
 }
@@ -157,7 +396,6 @@ void sortStringMenu(string arr[], int& n)
 		cout << "2. By size(long to short) " << endl;
 		cout << "3. alphabetically(A to Z)" << endl;
 		cout << "4. alphabetically(Z to A)" << endl;
-
 		cin >> choice;
 
 		switch (choice)
@@ -177,11 +415,45 @@ void sortStringMenu(string arr[], int& n)
 		case 4:
 			fromZtoA(arr, n);
 			break;
+		default:
+			cout << "The number you choose was not valid!" << endl << endl;
+			break;
+		}
+	}
+	else
+	{
+		cout << "There are no strings inserted yet. " << endl << endl
+			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
+	}
+}
 
+void searchMenu(string arr[], int n)
+{
 
+	if (n > 0)
+	{
+		int choice;
+		cout << "Choose a way to search" << endl;
+		cout << " --- MENU ---" << endl;
+		cout << "1. Search for a string" << endl;
+		cout << "2. Search for a character " << endl;
+		cout << "3. Search for a string with given length" << endl;
+		cin >> choice;
 
-		default: break;
-			cout << "The number you choose was not valid!" << endl;
+		switch (choice)
+		{
+		case 1:
+			searchString(arr, n);
+			break;
+		case 2:
+			searchCharacter(arr, n);
+			break;
+		case 3:
+			searchByLength(arr, n);
+			break;
+		default:
+			cout << "The number you choose was not valid!" << endl << endl;
+			break;
 		}
 	}
 	else
@@ -198,7 +470,6 @@ void editStringMenu(string arr[], int n)
 	{
 		int choice;
 		cout << "Choose a way to edit" << endl;
-
 		cout << " --- MENU ---" << endl;
 		cout << "1. Erase" << endl;
 		cout << "2. Add " << endl;
@@ -218,8 +489,9 @@ void editStringMenu(string arr[], int n)
 		case 3:
 			replaceStringMenu(arr, n);
 			break;
-		default: break;
-			cout << "The number you choose was not valid!" << endl;
+		default:
+			cout << "The number you choose was not valid!" << endl << endl;
+			break;
 		}
 	}
 	else
@@ -250,10 +522,11 @@ void reportMenu(string arr[], int n)
 		case 2:
 			reportShortest(arr, n);
 			break;
-	
+
 			break;
-		default: break;
-			cout << "The number you choose was not valid!" << endl;
+		default:
+			cout << "The number you choose was not valid!" << endl << endl;
+			break;
 		}
 	}
 	else
@@ -261,21 +534,6 @@ void reportMenu(string arr[], int n)
 		cout << "There are no strings inserted yet. " << endl << endl
 			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
 	}
-}
-
-void deleteString(string arr[],  int& n) 
-{
-	int deleteIndex;
-	cout << "Which index do you want to delete?";
-	cin >> deleteIndex;
-
-	for (int j =deleteIndex; j <= n; j++)
-	{
-		arr[n] = arr[n + 1];           
-	}
-
-	n--;
-
 }
 
 bool showMenu(string arr[], int& n)
@@ -317,13 +575,14 @@ bool showMenu(string arr[], int& n)
 		break;
 
 	case 6:
-		searchString(arr, n);
+		searchMenu(arr, n);
 		break;
 	case 7:
 		return false;
 
-	default: break;
-		cout << "The number you choose was not valid!" << endl;  
+	default:
+		cout << "The number you choose was not valid!" << endl << endl;
+		break;
 	}
 
 	return true;
@@ -335,13 +594,6 @@ int main()
 {
 	string arr[1000];
 	int n = 0;
-
-
-
-
-
-	
-
 	bool doShowMenu;
 
 	do {
@@ -350,3 +602,4 @@ int main()
 	} while (doShowMenu);
 
 }
+
