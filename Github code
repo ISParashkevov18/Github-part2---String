@@ -1,0 +1,273 @@
+// ------------------------------------------- MENUS -----------------------------------------------------------------
+
+void eraseStringMenu(string arr[], int n)
+{
+	int choice;
+	int index;
+	cout << "Choose an index to change";
+	cin >> index;
+	cout << "How do you want to choose a part to erase :" << endl;
+	cout << "1. By indexes" << endl;
+	cout << "2. By characters" << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		eraseByIndex(arr, n, index);
+		break;
+
+	case 2:
+		eraseByCharacters(arr, n, index);
+		break;
+	}
+}
+
+void insertStringMenu(string arr[], int n)
+{
+	int choice;
+	int index;
+	cout << "Choose an index to change";
+	cin >> index;
+	cout << "How do you want to insert into the string :" << endl;
+	cout << "1. By indexes" << endl;
+	cout << "2. By characters" << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		insertByIndex(arr, n, index);
+		break;
+
+	case 2:
+		insertByCharacters(arr, n, index);
+		break;
+	}
+}
+
+void replaceStringMenu(string arr[], int n)
+{
+	int choice;
+	int index;
+	cout << "Choose an index to change";
+	cin >> index;
+	cout << "How do you want to replace into the string :" << endl;
+	cout << "1. By indexes" << endl;
+	cout << "2. By characters" << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		replaceByIndex(arr, n, index);
+		break;
+
+	case 2:
+		replaceByCharacters(arr, n, index);
+		break;
+	}
+}
+
+void sortStringMenu(string arr[], int& n)
+{
+	if (n > 0)
+	{
+		int choice;
+		cout << "Choose a way to sort";
+
+		cout << " --- MENU ---" << endl;
+		cout << "1. By size(short to long)" << endl;
+		cout << "2. By size(long to short) " << endl;
+		cout << "3. alphabetically(A to Z)" << endl;
+		cout << "4. alphabetically(Z to A)" << endl;
+
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			shortToLong(arr, n);
+			break;
+
+		case 2:
+			longToShort(arr, n);
+			break;
+
+		case 3:
+			fromAtoZ(arr, n);
+			break;
+
+		case 4:
+			fromZtoA(arr, n);
+			break;
+
+
+
+		default: break;
+			cout << "The number you choose was not valid!" << endl;
+		}
+	}
+	else
+	{
+		cout << "There are no strings inserted yet. " << endl << endl
+			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
+	}
+}
+
+void editStringMenu(string arr[], int n)
+{
+
+	if (n > 0)
+	{
+		int choice;
+		cout << "Choose a way to edit" << endl;
+
+		cout << " --- MENU ---" << endl;
+		cout << "1. Erase" << endl;
+		cout << "2. Add " << endl;
+		cout << "3. Replace" << endl;
+		
+
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			eraseStringMenu(arr, n);
+			break;
+		case 2:
+			insertStringMenu(arr, n);
+			break;
+		case 3:
+			replaceStringMenu(arr, n);
+			break;
+		default: break;
+			cout << "The number you choose was not valid!" << endl;
+		}
+	}
+	else
+	{
+		cout << "There are no strings inserted yet. " << endl << endl
+			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
+	}
+}
+
+void reportMenu(string arr[], int n)
+{
+
+	if (n > 0)
+	{
+		int choice;
+		cout << "Choose a report" << endl;
+
+		cout << " --- MENU ---" << endl;
+		cout << "1. Longest string" << endl;
+		cout << "2. Shortest string" << endl;
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			reportLongest(arr, n);
+			break;
+		case 2:
+			reportShortest(arr, n);
+			break;
+	
+			break;
+		default: break;
+			cout << "The number you choose was not valid!" << endl;
+		}
+	}
+	else
+	{
+		cout << "There are no strings inserted yet. " << endl << endl
+			<< "You can insert some using the |Add string| button of the menu." << endl << endl;
+	}
+}
+
+void deleteString(string arr[],  int& n) 
+{
+	int deleteIndex;
+	cout << "Which index do you want to delete?";
+	cin >> deleteIndex;
+
+	for (int j =deleteIndex; j <= n; j++)
+	{
+		arr[n] = arr[n + 1];           
+	}
+
+	n--;
+
+}
+
+bool showMenu(string arr[], int& n)
+{
+
+	int choice;
+	cout << " --- MAIN MENU ---" << endl;
+	cout << "1. Show all strings" << endl;
+	cout << "2. Add strings" << endl;
+	cout << "3. Edit a string" << endl;          // main menu
+	cout << "4. Sort" << endl;
+	cout << "5. See the reports" << endl;
+	cout << "6. Search for a string" << endl;
+	cout << "7. Exit the program" << endl;
+
+	cin >> choice;
+
+	switch (choice)
+	{
+	case 1:
+		printArray(arr, n);
+		break;
+
+	case 2:
+		addString(arr, n);
+		
+		break;
+
+	case 3:
+		editStringMenu(arr, n);
+		break;
+
+	case 4:
+		sortStringMenu(arr, n);
+		break;
+
+	case 5:
+		reportMenu(arr, n);
+		break;
+
+	case 6:
+		searchString(arr, n);
+		break;
+	case 7:
+		return false;
+
+	default: break;
+		cout << "The number you choose was not valid!" << endl;  
+	}
+
+	return true;
+}
+
+// -------------------------------------------- MAIN -----------------------------------------------------------------------
+
+int main()
+{
+	string arr[1000];
+	int n = 0;
+
+
+
+
+
+	
+
+	bool doShowMenu;
+
+	do {
+
+		doShowMenu = showMenu(arr, n);
+	} while (doShowMenu);
+
+}
