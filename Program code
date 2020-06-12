@@ -1,3 +1,145 @@
+#include<iostream> 
+#include<string>
+#include <iomanip> 
+using namespace std;
+// ------------------------------------ SORT AND FIND FUNTIONS --------------------------------
+
+void shortToLong(string arr[], int n)
+{
+	for (int i = 0; i <= n; i++)
+	{
+		string temp = arr[i];
+
+
+		int j = i - 1;
+		while (j >= 0 && temp.length() < arr[j].length())
+		{
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = temp;
+	}
+}
+
+void longToShort(string arr[], int n)
+{
+	for (int i = 0; i <= n; i++)
+	{
+		string temp = arr[i];
+
+
+		int j = i - 1;
+		while (j >= 0 && temp.length() > arr[j].length())
+		{
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = temp;
+	}
+}
+
+void fromAtoZ(string arr[], int n)
+{
+	for (int i = 0; i <= n; i++)
+	{
+		string temp = arr[i];
+
+
+		int j = i - 1;
+		while (j >= 0 && temp < arr[j])
+		{
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = temp;
+	}
+}
+
+void fromZtoA(string arr[], int n)
+{
+	for (int i = 0; i <= n; i++)
+	{
+		string temp = arr[i];
+
+
+		int j = i - 1;
+		while (j >= 0 && temp > arr[j])
+		{
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = temp;
+	}
+}
+
+void searchString(string arr[], int& n)
+{
+	string search;
+	int stringsFound = 0;
+	cout << "What do you want to search for?";
+	cin >> search;
+	for (int i = 0; i < n; i++)
+	{
+		string temp = arr[i];
+		if (temp.find(search) == 0)
+		{
+			cout << temp << endl;
+			stringsFound++;
+		}
+	}
+	if (stringsFound == 0)
+	{
+		cout << "No matching strings found!" << endl << endl;
+	}
+}
+
+void searchCharacter(string arr[], int& n)
+{
+    string  userCharacter;
+	int charactersFound = 0;
+	cout << " What character do you want to search for?";
+	cin >> userCharacter;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < arr[i].length(); j++)
+		{
+			string temp;
+			temp = arr[i].at(j);
+
+			if (temp.compare(userCharacter) == 0)
+			{
+				cout << arr[i] << endl;
+				charactersFound++;
+			}
+		}
+	}
+	if (charactersFound == 0)
+	{
+		cout << "None of the strings have this character!" << endl << endl;
+	}
+}
+
+void searchByLength(string arr[], int& n)
+{
+	int chosenLength;
+	int stringsFound = 0;
+	cout << "Whats the length of the searched strings?";
+	cin >> chosenLength;
+	for (int i = 0; i < n; i++)
+	{
+		string temp = arr[i];
+		if (chosenLength == arr[i].length())
+		{
+			cout << temp << endl;
+			stringsFound++;
+		}
+	}
+	if(stringsFound ==0)
+	{
+		cout << "None of the strings have this length!" << endl << endl;
+	}
+}
+
 // --------------------------------------------- EDIT FUNCTIONS --------------------------------------------------------------
 void eraseByIndex(string arr[], int n , int index)
 {
